@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificación de Certificado</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="card shadow-lg p-4">
-            <h2 class="text-center">Verificación de Certificado</h2>
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card shadow-lg p-4 text-center" style="max-width: 500px; width: 100%; border-radius: 12px;">
+          <h2 class="text-primary fw-bold mt-2">Consulta de Certificado</h2>
+          <p class="text-muted">Ingrese el código para validar su autenticidad.</p>
             <form id="verificationForm">
                 <div class="mb-3">
-                    <label for="certificateCode" class="form-label">Código del Certificado</label>
-                    <input type="text" class="form-control" id="certificateCode" required>
+                    <input type="text" class="form-control text-center" id="certificateCode" placeholder="Código" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Verificar</button>
+                <button type="submit" class="btn btn-success w-100">Verificar</button>
             </form>
             <div id="result" class="mt-4"></div>
         </div>
@@ -25,20 +25,32 @@
     <script>
         document.getElementById("verificationForm").addEventListener("submit", function(event) {
             event.preventDefault();
-            const code = document.getElementById("certificateCode").value;
+            const code = document.getElementById("certificateCode").value.trim();
             const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = ""; // Limpiar resultados previos
 
             // Simulación de verificación (Reemplazar con llamada real a backend)
             if (code === "123456") {
                 resultDiv.innerHTML = `
-                    <div class='alert alert-success'>
-                        <p><strong>DNI:</strong> 76543210</p>
-                        <p><strong>Nombre:</strong> Juan Pérez</p>
-                        <p><strong>Curso:</strong> Desarrollo Web</p>
+                    <div class='alert alert-success text-start p-3 rounded'>
+                        <div class="d-flex align-items-center">
+                            <i class='bi bi-check-circle-fill text-success me-3' style='font-size: 3rem;'></i>
+                            <div>
+                                <p class="m-0"><strong>DNI:</strong> 70300831</p>
+                                <p class="m-0"><strong>Nombre:</strong> Linio Colquehuanca Rodrigo</p>
+                                <p class="m-0"><strong>Curso:</strong> Desarrollo Backend con Node.js</p>
+                                <p class="m-0"><strong>Horas:</strong> 120</p>
+                            </div>
+                        </div>
                     </div>
                 `;
             } else {
-                resultDiv.innerHTML = `<div class='alert alert-danger'>Código inválido o certificado no encontrado.</div>`;
+                resultDiv.innerHTML = `
+                    <div class='alert alert-danger text-center p-3 rounded'>
+                        <i class='bi bi-x-circle-fill text-danger' style='font-size: 3rem;'></i>
+                        <p class="mt-2">Código inválido o certificado no encontrado.</p>
+                    </div>
+                `;
             }
         });
     </script>
